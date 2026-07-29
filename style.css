@@ -1,0 +1,65 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial, sans-serif;
+  background:#0b0b0b;
+  color:white;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px;
+  background:#111;
+  border-bottom:2px solid gold;
+}
+
+header h1{
+  color:gold;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  margin:0 10px;
+}
+
+nav a:hover{
+  color:gold;
+}
+
+.hero{
+  text-align:center;
+  padding:100px 20px;
+}
+
+.hero h2{
+  font-size:42px;
+  color:gold;
+}
+
+.hero p{
+  margin:20px 0;
+  font-size:18px;
+  color:#ccc;
+}
+
+button{
+  padding:12px 25px;
+  margin:10px;
+  background:gold;
+  color:black;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+button:hover{
+  background:#ffd700;
+}
