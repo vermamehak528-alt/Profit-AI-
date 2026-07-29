@@ -1,31 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profit AI</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
-<header>
-  <h1>Profit AI</h1>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">AI Chat</a>
-    <a href="#">Dashboard</a>
-    <a href="#">Pricing</a>
-    <a href="#">Contact</a>
-  </nav>
-</header>
+const firebaseConfig = {
+  apiKey: "AIzaSyCsJ8BIXu3xvaMnCwF8WNesRPJfy9zbadg",
+  authDomain: "profit-ai-37155.firebaseapp.com",
+  projectId: "profit-ai-37155",
+  storageBucket: "profit-ai-37155.firebasestorage.app",
+  messagingSenderId: "245284035512",
+  appId: "1:245284035512:web:00c72b557fc04bf16d0d4d",
+  measurementId: "G-BCD345244E"
+};
 
-<section class="hero">
-  <h2>Financial Intelligence Redefined</h2>
-  <p>AI-powered market analysis for smarter investment decisions.</p>
-  <button>Start Free Trial</button>
-  <button>Try AI Chat</button>
-</section>
+const app = initializeApp(firebaseConfig);
 
-<script type="module" src="script.js"></script>
-</body>
-</html>
+console.log("Firebase Connected Successfully!");
