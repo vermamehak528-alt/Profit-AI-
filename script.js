@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profit AI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Profit AI</h1>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">AI Chat</a>
+    <a href="#">Dashboard</a>
+    <a href="#">Pricing</a>
+    <a href="#">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Financial Intelligence Redefined</h2>
+  <p>AI-powered market analysis for smarter investment decisions.</p>
+  <button>Start Free Trial</button>
+  <button>Try AI Chat</button>
+</section>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>
