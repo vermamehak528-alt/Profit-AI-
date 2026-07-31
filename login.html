@@ -6,7 +6,8 @@
 <title>Login - Profit AI</title>
 <link rel="stylesheet" href="style.css">
 </head>
-<header>
+<body>
+  <header>
   🤖 Profit AI
 </header>
 
@@ -17,7 +18,7 @@
 
   <input type="password" placeholder="Password">
 
-  <button>Login</button>
+  <button onclick="login()">Login</button>
 
   <p>Don't have an account?
     <a href="Signup.html">Create Account</a>
@@ -25,4 +26,10 @@
 
   <a href="index.html">← Back to Home</a>
 </div>
+  <script>
+function login() {
+  window.location.href = "Dashboard.html";
+}
+  </script>
+</body>
 </html>
