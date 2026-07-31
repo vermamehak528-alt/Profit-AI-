@@ -79,22 +79,7 @@ button{
 <button onclick="send()">Send</button>
 </div>
 
-<script>
-function send(){
-
-let text=document.getElementById("msg").value;
-
-if(text=="") return;
-
-document.getElementById("chat").innerHTML+=
-'<div class="user">'+text+'</div>';
-
-document.getElementById("chat").innerHTML+=
-'<div class="bot">This is a demo AI response.</div>';
-
-document.getElementById("msg").value="";
-}
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
