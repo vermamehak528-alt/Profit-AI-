@@ -37,6 +37,8 @@ async function send() {
     );
 
     const data = await response.json();
+console.log(data);
+alert(JSON.stringify(data));
 
     document.getElementById("loading").remove();
 
