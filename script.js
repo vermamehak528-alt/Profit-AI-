@@ -60,3 +60,4 @@ async function send() {
     chat.innerHTML += `<div class="bot">Error connecting to Gemini API.</div>`;
   }
 }
+window.send = send;
