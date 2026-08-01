@@ -6,25 +6,50 @@
 <title>Login - Profit AI</title>
 <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <header>
-  🤖 Profit AI
+
+<header>
+🤖 Profit AI
 </header>
 
 <div class="login-container">
-  <h1>Welcome Back</h1>
 
-  <input type="email" placeholder="Email">
+<h1>Welcome Back</h1>
 
-  <input type="password" placeholder="Password">
+<input type="email" id="email" placeholder="Email" required>
 
-  <button onclick="window.location.href='dashboard.html'">Login</button>
+<input type="password" id="password" placeholder="Password" required>
 
-  <p>Don't have an account?
-    <a href="signup.html">Create Account</a>
-  </p>
+<button onclick="login()">Login</button>
 
-  <a href="index.html">← Back to Home</a>
+<p>
+Don't have an account?
+<a href="signup.html">Create Account</a>
+</p>
+
+<a href="index.html">← Back to Home</a>
+
 </div>
+
+<script type="module">
+import { auth } from "./firebase.js";
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+window.login = function () {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  signInWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      alert("Login successful!");
+      window.location.href = "dashboard.html";
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+};
+</script>
+
 </body>
 </html>
