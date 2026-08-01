@@ -15,31 +15,54 @@
 
 <div class="login-container">
 
-<h2>Welcome to Profit AI 🚀</h2>
+<h1>Welcome to Profit AI 🚀</h1>
 
-<p>Your AI workspace is ready.</p>
+<p id="userEmail">Loading...</p>
 
-<a href="chat.html">
-<button>💬 AI Chat</button>
-</a>
+<br>
 
-<a href="pricing.html">
-<button>💎 Upgrade Plan</button>
-</a>
+<a href="chat.html"><button>💬 AI Chat</button></a>
 
-<a href="contact.html">
-<button>📞 Contact Support</button>
-</a>
+<br><br>
 
-<a href="settings.html">
-<button>⚙️ Settings</button>
-</a>
+<a href="pricing.html"><button>💎 Upgrade Plan</button></a>
 
-<a href="index.html">
-<button>🚪 Logout</button>
-</a>
+<br><br>
+
+<a href="contact.html"><button>📞 Contact Support</button></a>
+
+<br><br>
+
+<a href="settings.html"><button>⚙️ Settings</button></a>
+
+<br><br>
+
+<button onclick="logout()">🚪 Logout</button>
 
 </div>
+
+<script type="module">
+import { auth } from "./firebase.js";
+import {
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    document.getElementById("userEmail").innerHTML =
+      "Logged in as: <b>" + user.email + "</b>";
+  } else {
+    window.location.href = "login.html";
+  }
+});
+
+window.logout = function () {
+  signOut(auth).then(() => {
+    window.location.href = "login.html";
+  });
+};
+</script>
 
 </body>
 </html>
