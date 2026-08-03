@@ -3,7 +3,7 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth
 import { getFirestore } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCsJ8BIXu3xvaMnCwF8WNesRPJfy9zbadg",
+  apiKey: "YOUR_API_KEY",
   authDomain: "profit-ai-37155.firebaseapp.com",
   projectId: "profit-ai-37155",
   storageBucket: "profit-ai-37155.firebasestorage.app",
