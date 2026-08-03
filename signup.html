@@ -53,8 +53,12 @@ window.signup = async function () {
   try {
 
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    await setDoc(doc(db, "users", user.uid), {
+
+const user = userCredential.user;
+
+await setDoc(doc(db, "users", user.uid), {
   email: user.email,
+  uid: user.uid,
   createdAt: new Date().toISOString()
 });
     alert("Account created successfully!");
