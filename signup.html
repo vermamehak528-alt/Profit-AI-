@@ -31,8 +31,11 @@
 </div>
 
 <script type="module">
-import { auth } from "./firebase.js";
-
+import { auth, db } from "./firebase.js";
+import {
+  doc,
+  setDoc
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 import {
   createUserWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
@@ -50,7 +53,10 @@ window.signup = async function () {
   try {
 
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-
+    await setDoc(doc(db, "users", user.uid), {
+  email: user.email,
+  createdAt: new Date().toISOString()
+});
     alert("Account created successfully!");
 
     window.location.href = "dashboard.html";
