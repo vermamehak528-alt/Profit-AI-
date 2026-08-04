@@ -37,16 +37,27 @@ import { auth } from "./firebase.js";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 window.login = function () {
-  const email = document.getElementById("email").value;
+  const email = document.getElementById("email").value.trim();
+const password = document.getElementById("password").value.trim();
+
+if (!email || !password) {
+  alert("Please enter your email and password.");
+  return;
+}
   const password = document.getElementById("password").value;
 
   signInWithEmailAndPassword(auth, email, password)
     .then(() => {
-      alert("Login successful!");
       window.location.href = "dashboard.html";
-    })
+    }
     .catch((error) => {
-      alert(error.message);
+      if (error.code === "auth/invalid-credential") {
+  alert("Invalid email or password.");
+} else if (error.code === "auth/too-many-requests") {
+  alert("Too many login attempts. Please try again later.");
+} else {
+  alert("Login failed. Please try again.");
+      }
     });
 };
 </script>
