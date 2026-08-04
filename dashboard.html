@@ -51,16 +51,22 @@ import {
 onAuthStateChanged(auth, (user) => {
   if (user) {
     document.getElementById("userEmail").innerHTML =
-      "Logged in as: <b>" + user.email + "</b>";
+      const name = user.displayName || "User";
+document.getElementById("userEmail").innerHTML =
+  `Welcome, <b>${name}</b><br>${user.email}`;
   } else {
     window.location.href = "login.html";
   }
 });
 
-window.logout = function () {
-  signOut(auth).then(() => {
-    window.location.href = "login.html";
-  });
+  window.logout = function () {
+  signOut(auth)
+    .then(() => {
+      window.location.href = "login.html";
+    })
+    .catch(() => {
+      alert("Logout failed. Please try again.");
+    });
 };
 </script>
 
