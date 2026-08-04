@@ -23,7 +23,7 @@ header{
 }
 
 #chat{
-    height:65vh;
+    height:calc(100vh - 140px);
     overflow-y:auto;
     padding:15px;
 }
@@ -47,22 +47,31 @@ header{
 .bottom{
     position:fixed;
     bottom:0;
+    left:0;
     width:100%;
     display:flex;
+    padding:10px;
+    box-sizing:border-box;
     background:#222;
 }
-
+    
 input{
     flex:1;
-    padding:15px;
+    padding:14px;
     border:none;
+    border-radius:12px;
+    outline:none;
     font-size:16px;
-}
+    }
 
 button{
     background:#FFD700;
+    color:black;
     border:none;
-    padding:15px 20px;
+    border-radius:12px;
+    margin-left:10px;
+    padding:14px 22px;
+    cursor:pointer;
     font-weight:bold;
 }
 </style>
@@ -78,7 +87,13 @@ button{
 <input id="msg" placeholder="Ask anything...">
 <button onclick="send()">Send</button>
 </div>
-
+<script>
+document.getElementById("msg").addEventListener("keypress", function(e){
+    if(e.key==="Enter"){
+        send();
+    }
+});
+</script>
 <script type="module" src="script.js"></script>
 
 </body>
