@@ -82,11 +82,19 @@ button{
 
 <header>🤖 Profit AI Chat</header>
 
-<div id="chat"></div>
-
 <div class="bottom">
-<input id="msg" placeholder="Ask anything...">
-<button onclick="send()">Send</button>
+    <button id="voiceBtn" title="Voice">🎤</button>
+
+    <input
+        id="msg"
+        type="text"
+        placeholder="Ask Profit AI anything..."
+        autocomplete="off"
+    >
+
+    <button id="uploadBtn" title="Upload">📎</button>
+
+    <button onclick="send()">➤</button>
 </div>
 <script>
 document.getElementById("msg").addEventListener("keypress", function(e){
@@ -95,6 +103,7 @@ document.getElementById("msg").addEventListener("keypress", function(e){
     }
 });
 </script>
+<input type="file" id="fileInput" hidden>
 <script type="module" src="script.js"></script>
 
 </body>
