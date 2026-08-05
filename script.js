@@ -74,14 +74,6 @@ async function send() {
   input.value = "";
 
   chat.innerHTML += `<div class="bot" id="loading">Thinking...</div>`;
-  await addDoc(
-    collection(db, "users", currentUser.uid, "chats"),
-    {
-        role: "bot",
-        text: reply,
-        time: serverTimestamp()
-    }
-);
   chat.scrollTop = chat.scrollHeight;
 
   try {
@@ -123,6 +115,14 @@ async function send() {
     }
 
     chat.innerHTML += `<div class="bot">${reply}</div>`;
+   await addDoc(
+  collection(db, "users", currentUser.uid, "chats"),
+  {
+    role: "bot",
+    text: reply,
+    time: serverTimestamp()
+  }
+);
     chat.scrollTop = chat.scrollHeight;
 
   } catch (error) {
