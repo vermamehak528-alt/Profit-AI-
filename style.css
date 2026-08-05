@@ -196,3 +196,12 @@ flex-direction:column;
 align-items:center;
 }
 }
+.dark{
+    background:#111;
+    color:white;
+}
+
+.dark .login-container{
+    background:#222;
+    color:white;
+}
