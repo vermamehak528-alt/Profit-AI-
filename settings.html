@@ -16,7 +16,7 @@
 <h2>Account Settings</h2>
 
 <label>
-<input type="checkbox">
+<input type="checkbox" id="darkMode">
  Dark Mode
 </label>
 
@@ -29,13 +29,30 @@
 
 <br><br>
 
-<button>Save Settings</button>
+<button onclick="saveSettings()">Save Settings</button>
 
 <br><br>
 
 <a href="dashboard.html">⬅ Back to Dashboard</a>
 
 </div>
+<script>
+const darkMode = document.getElementById("darkMode");
 
+if (localStorage.getItem("theme") === "dark") {
+    darkMode.checked = true;
+    document.body.classList.add("dark");
+}
+
+function saveSettings() {
+    if (darkMode.checked) {
+        localStorage.setItem("theme", "dark");
+        alert("Dark mode enabled.");
+    } else {
+        localStorage.setItem("theme", "light");
+        alert("Light mode enabled.");
+    }
+}
+</script>
 </body>
 </html>
