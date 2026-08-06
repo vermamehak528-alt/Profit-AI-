@@ -36,10 +36,13 @@ async function send() {
     );
 
     const data = await response.json();
-
+    console.log(response.status);
+    console.log(data);
     document.getElementById("loading").remove();
 
-    let reply = "Sorry, I couldn't generate a response.";
+    if (!response.ok) {
+  alert(JSON.stringify(data, null, 2));
+    }
 
     if (
       data.candidates &&
