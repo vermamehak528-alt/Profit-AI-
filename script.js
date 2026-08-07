@@ -10,7 +10,7 @@ async function send() {
   chat.innerHTML += `<div class="user">${message}</div>`;
   input.value = "";
 
-  chat.innerHTML += `<div class="bot" id="loading">Thinking...</div>`;
+  chat.innerHTML += `<div class="bot" id="loading">🤖 Thinking...</div>`;
   chat.scrollTop = chat.scrollHeight;
 
   try {
@@ -32,7 +32,8 @@ async function send() {
 });
 
     const data = await response.json();
-
+const loading = document.getElementById("loading");
+if (loading) loading.remove();
 let reply = "Sorry, I couldn't generate a response.";
 
 if (
@@ -59,4 +60,4 @@ if (
 }
 
 window.send = send;
-
+chat.scrollTop = chat.scrollHeight;
