@@ -1,3 +1,4 @@
+const API_KEY = "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";
 import { auth, db } from "./firebase.js";
 
 import {
