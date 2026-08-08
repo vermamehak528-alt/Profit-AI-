@@ -112,17 +112,11 @@ async function loadMessages() {
 // Send message
 async function send() {
 
-    if (!currentUser) {
-        alert("Please login first.");
-        return;
-    }
-
     const message = input.value.trim();
 
     if (!message) return;
 
-
-    // Display user message
+    // Show user message
     chat.innerHTML += `
         <div class="user">
             ${escapeHTML(message)}
@@ -131,52 +125,18 @@ async function send() {
 
     input.value = "";
 
-    chat.scrollTop = chat.scrollHeight;
-
-
-    // Save user message
-    try {
-
-        await addDoc(
-            collection(
-                db,
-                "users",
-                currentUser.uid,
-                "chats"
-            ),
-            {
-                role: "user",
-                text: message,
-                time: serverTimestamp()
-            }
-        );
-
-    } catch (error) {
-
-        console.error("User message save error:", error);
-    }
-
-
-    // Thinking indicator
-    const loading = document.createElement("div");
-
-    loading.className = "bot";
-    loading.id = "loading";
-    loading.textContent = "🤖 Thinking...";
-
-    chat.appendChild(loading);
+    // Show thinking immediately
+    chat.innerHTML += `
+        <div class="bot" id="loading">
+            🤖 Thinking...
+        </div>
+    `;
 
     chat.scrollTop = chat.scrollHeight;
 
-
     try {
 
-        const controller = new AbortController();
-
-        const timeout = setTimeout(() => {
-            controller.abort();
-        }, 30000);
-
+        console.log("1. Sending request to Groq...");
 
         const response = await fetch(
             "https://api.groq.com/openai/v1/chat/completions",
@@ -184,61 +144,42 @@ async function send() {
                 method: "POST",
 
                 headers: {
-                    "Authorization": `Bearer ${API_KEY}`,
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + API_KEY
                 },
 
-                signal: controller.signal,
-
                 body: JSON.stringify({
-
                     model: "openai/gpt-oss-20b",
 
                     messages: [
-
-                        {
-                            role: "system",
-                            content:
-                                "You are Profit AI, a helpful AI assistant. Give clear, friendly and useful answers."
-                        },
-
                         {
                             role: "user",
                             content: message
                         }
-
-                    ],
-
-                    max_completion_tokens: 1000
-
+                    ]
                 })
             }
         );
 
-
-        clearTimeout(timeout);
-
+        console.log("2. Groq status:", response.status);
 
         const data = await response.json();
 
+        console.log("3. Groq response:", data);
 
-        // Remove Thinking
+        const loading = document.getElementById("loading");
+
         if (loading) {
             loading.remove();
         }
 
-
-        // Check API response
         if (!response.ok) {
-
-            console.error("Groq Error:", data);
 
             chat.innerHTML += `
                 <div class="bot">
-                    ❌ Groq Error ${response.status}: 
+                    ❌ Groq Error ${response.status}<br>
                     ${escapeHTML(
-                        data.error?.message ||
-                        "Unknown API error"
+                        data.error?.message || "Unknown error"
                     )}
                 </div>
             `;
@@ -246,14 +187,10 @@ async function send() {
             return;
         }
 
-
-        // Get AI reply
         const reply =
             data.choices?.[0]?.message?.content ||
-            "Sorry, I couldn't generate a response.";
+            "No reply received.";
 
-
-        // Display AI reply
         chat.innerHTML += `
             <div class="bot">
                 ${escapeHTML(reply)}
@@ -262,50 +199,23 @@ async function send() {
 
         chat.scrollTop = chat.scrollHeight;
 
-
-        // Save AI reply
-        try {
-
-            await addDoc(
-                collection(
-                    db,
-                    "users",
-                    currentUser.uid,
-                    "chats"
-                ),
-                {
-                    role: "bot",
-                    text: reply,
-                    time: serverTimestamp()
-                }
-            );
-
-        } catch (error) {
-
-            console.error(
-                "AI reply save error:",
-                error
-            );
-        }
-
-
     } catch (error) {
+
+        console.error("FETCH ERROR:", error);
+
+        const loading = document.getElementById("loading");
 
         if (loading) {
             loading.remove();
         }
 
-        console.error("Connection error:", error);
-
-
-        if (error.name === "AbortError") {
-
-            chat.innerHTML += `
-                <div class="bot">
-                    ⏱️ The AI took too long to respond.
-                    Please try again.
-                </div>
-            `;
+        chat.innerHTML += `
+            <div class="bot">
+                ❌ ${escapeHTML(error.message)}
+            </div>
+        `;
+    }
+}
 
         } else {
 
