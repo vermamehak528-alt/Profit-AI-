@@ -286,4 +286,11 @@ chat.scrollTop = chat.scrollHeight;
 }
 
 window.send = send;
-  
+ document.getElementById("sendBtn").addEventListener("click", send);
+
+document.getElementById("msg").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        send();
+    }
+}); 
