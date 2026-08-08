@@ -294,3 +294,22 @@ document.getElementById("msg").addEventListener("keydown", function(e) {
         send();
     }
 }); 
+window.send = send;
+
+const sendBtn = document.getElementById("sendBtn");
+
+if (sendBtn) {
+    sendBtn.addEventListener("click", function () {
+        console.log("SEND BUTTON CLICKED");
+        send();
+    });
+}
+
+if (input) {
+    input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            send();
+        }
+    });
+}
