@@ -21,8 +21,8 @@ header{
     text-align:center;
     font-size:24px;
     font-weight:bold;
-}  
-    
+}
+
 #chat{
     height:calc(100vh - 140px);
     overflow-y:auto;
@@ -109,7 +109,7 @@ button{
 
     <button id="uploadBtn" title="Upload">📎</button>
 
-    <button onclick="send()">➤</button>
+    <button id="sendBtn" type="button">➤</button>
 </div>
 <script>
 document.getElementById("msg").addEventListener("keypress", function(e){
