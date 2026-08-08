@@ -256,3 +256,10 @@ if (input) {
 
 
 window.send = send;
+
+input.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        send();
+    }
+});
