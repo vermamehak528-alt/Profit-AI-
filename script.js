@@ -186,11 +186,32 @@ async function send() {
 
         const data = await response.json();
 
-        // Remove Thinking
-        loading.remove();
+loading.remove();
 
-        // API error
-        if (!response.ok) {
+console.log("Groq status:", response.status);
+console.log("Groq response:", data);
+
+if (!response.ok) {
+    chat.innerHTML += `
+        <div class="bot">
+            ❌ Groq Error ${response.status}: 
+            ${escapeHTML(data.error?.message || "Unknown API error")}
+        </div>
+    `;
+    return;
+}
+
+const reply =
+    data.choices?.[0]?.message?.content ||
+    "Sorry, I couldn't generate a response.";
+
+chat.innerHTML += `
+    <div class="bot">
+        ${escapeHTML(reply)}
+    </div>
+`;
+
+chat.scrollTop = chat.scrollHeight;
 
             console.error("Groq API Error:", data);
 
